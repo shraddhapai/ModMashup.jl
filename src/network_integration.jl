@@ -32,8 +32,10 @@ function network_integration!(model::MashupIntegration,
     n_patients = database.n_patients
     net = SharedArray{Float64}(n_patients * n_net, n_patients)
     eigen_value_list_ = zeros(n_patients*n_net,n_patients)
+		verbal = 1
 
     #@show eigen_value_list_
+		println("Shraddha's version")
     println("$n_net networks loaded.")
     println("$n_patients patients loaded.")
     println("Running diffusion....")
