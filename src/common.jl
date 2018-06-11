@@ -237,7 +237,8 @@ function load_net(filename::String,
     if !isa(network, Array{Float64,2})
         for i in 1:n_relation
             for j in 1:2
-								@printf("%i, %i: %1.2f\n",i,j,network[i,j])
+								@printf("%i %i", i,j)
+								@printf("%s\n",network[i,j])
                 @inbounds network[i,j] = database.patients_index[network[i,j]] 
             end
         end
