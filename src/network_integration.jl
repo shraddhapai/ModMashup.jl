@@ -42,10 +42,11 @@ function network_integration!(model::MashupIntegration,
     tic()
     if database.smooth
         @simd for i = 1:n_net
-            #verbal ? (@printf "Loading %s\n" net_files[i]) : nothing
+            @printf "Loading %s\n" net_files[i]
             A = load_net(net_files[i], database)#load the similarirty net.
             #verbal ? (@printf "Running diffusion\n") : nothing
             Q = rwr(A, 0.5) #running random walk.
+					  @println("done rwr")
             # smooth or not?
             start = n_patients * (i-1)+1 
             R = log.(Q + 1/n_patients) #smoothing
@@ -54,6 +55,7 @@ function network_integration!(model::MashupIntegration,
             #eigen_value_list_[start:(start+n_patients-1),:] = eigenvector;
         end
     else
+				@println("not smoothing")
         @simd for i = 1:n_net
             #verbal ? (@printf "Loading %s\n" net_files[i]) : nothing
             A = load_net(net_files[i], database)#load the similarirty net.
